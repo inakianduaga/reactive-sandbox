@@ -1,10 +1,9 @@
-/// <reference path="../../typings/tsd.d.ts" />
-
+/// <reference path="../../node_modules/rxjs-es/Rx.d.ts" />
 import * as React from 'react';
 import { connect } from 'react-redux';
-
 import { incrementCounter, decrementCounter, addCounter } from '../actions';
 import { CounterList } from './counter_list';
+import * as Rx from '../../node_modules/rxjs-es/Rx';
 
 interface IAppState {
   counters: number[];
