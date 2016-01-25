@@ -1,0 +1,55 @@
+{
+  "name": "reactive-sandbox",
+  "version": "0.0.0",
+  "description": "Playground for experimenting/learning ReactiveX",
+  "main": "index.js",
+  "scripts": {
+    "build:webpack": "NODE_ENV=production webpack --config config/webpack.prod.js",
+    "build": "npm run clean && npm run build:webpack",
+    "clean": "rimraf build",
+    "start": "node dev_server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typings-install": "node ./node_modules/tsd/build/cli.js install",
+    "typings-update": "node ./node_modules/tsd/build/cli.js update --overwrite --save",
+    "version": "npm run build",
+    "postversion": "git push && git push --tags && rm -rf lib"
+  },
+  "author": "Inaki Anduaga",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inakianduaga/reactive-sandbox.git"
+  },
+  "bugs": {
+    "url": "https://github.com/inakianduaga/reactive-sandbox.git/issues"
+  },
+  "homepage": "https://github.com/inakianduaga/reactive-sandbox.git",
+  "devDependencies": {
+    "babel-core": "^6.3.21",
+    "babel-loader": "^6.2.1",
+    "babel-plugin-react-transform": "^2.0.0",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "express": "^4.13.4",
+    "react-transform-catch-errors": "^1.0.1",
+    "react-transform-hmr": "^1.0.1",
+    "redbox-react": "^1.2.0",
+    "rimraf": "^2.5.1",
+    "tslint": "^3.3.0",
+    "tslint-loader": "^2.1.0",
+    "webpack": "^1.12.12",
+    "webpack-dev-middleware": "^1.5.1",
+    "webpack-hot-middleware": "^2.6.3",
+    "tsd": "^0.6.5"
+  },
+  "dependencies": {
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "react-redux": "^4.0.6",
+    "redux": "^3.0.6",
+    "rxjs-es": "^5.0.0-beta.1",
+    "ts-loader": "^0.7.2",
+    "typescript": "^1.7.5"
+  }
+}
