@@ -53,10 +53,10 @@
     "no-trailing-whitespace": true,
     "no-unreachable": true,
     "no-unused-expression": true,
-    "no-unused-variable": true,
+    "no-unused-variable": "react",
     "no-use-before-declare": true,
     "no-var-keyword": true,
-    "no-var-requires": true,
+    "no-var-requires": false,
     "object-literal-sort-keys": true,
     "one-line": [true,
         "check-open-brace",
@@ -69,15 +69,12 @@
     "semicolon": true,
     "switch-default": true,
     "trailing-comma": [true, {
-        "multiline": "always",
-        "singleline": "never"
+        "multiline": "always"
     }],
     "triple-equals": [true, "allow-null-check"],
     "typedef": [true,
-        "call-signature",
         "parameter",
         "property-declaration",
-        "variable-declaration",
         "member-variable-declaration"
     ],
     "typedef-whitespace": [true, {

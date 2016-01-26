@@ -1,6 +1,4 @@
 /// <reference path="../typings/tsd.d.ts" />
-/// <reference path="../node_modules/rxjs-es/Rx.d.ts" />
-
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Store, createStore, applyMiddleware, compose } from 'redux';
@@ -8,8 +6,8 @@ import DevTools from './containers/Devtools';
 import { Provider } from 'react-redux';
 let createLogger = require('redux-logger');
 
-import { App } from './components/app';
-import { counterApp as rootReducer } from './reducers';
+import App from './components/app';
+import rootReducer from './reducers';
 
 interface IHotModule {
   hot?: { accept: (path: string, callback: () => void) => void };

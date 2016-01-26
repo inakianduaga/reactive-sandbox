@@ -1,38 +1,32 @@
-/// <reference path="../../node_modules/rxjs-es/Rx.d.ts" />
 import * as React from 'react';
-import { connect } from 'react-redux';
-import { incrementCounter, decrementCounter, addCounter } from '../actions';
-import { CounterList } from './counter_list';
-import * as Rx from '../../node_modules/rxjs-es/Rx';
+import * as ReactDOM from 'react-dom';
+let { connect } = require('react-redux');
+import * as Rx from '../../node_modules/rxjs/Rx';
+import IReduxConnectedComponent from '../types/IReduxConnectedComponent';
+import IGlobalState from '../IGlobalState';
 
-interface IAppState {
-  counters: number[];
-}
+interface IAppProps extends IReduxConnectedComponent, IGlobalState {
+  dispatch: Function;
+};
 
-interface IAppProps {
-  dispatch?: (func: any) => void;
-  counters?: number[];
-}
+function select(state: IGlobalState): IGlobalState {
+  return state;
+};
 
-function select(state: { counters: number[] }): IAppState {
-  return {
-    counters: state.counters
-  };
-}
+const App = (props: IAppProps) => {
 
-@connect(select)
-export class App extends React.Component<IAppProps, {}> {
-  public render(): React.ReactElement<{}> {
-    const { dispatch, counters }: any = this.props;
+  // public componentDidMount() {
+  //   const angleControl = Rx.Observable.fromEvent((this.refs as any).angleControl, 'value');
+  // }
 
-    return (<div>
-        <CounterList counters={counters}
-                     increment={(index: number) => dispatch(incrementCounter(index))}
-                     decrement={(index: number) => dispatch(decrementCounter(index))}
-        />
+  const { dispatch } = props;
 
-        <button onClick={() => dispatch(addCounter())}>Add Counter</button>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <div ref='cannon'>CANNON HERE</div>
+      <input type='range' ref='angleControl' id='angleControl' min='0' value='0' max='360' step='2' />
+    </div>
+  );
+};
+
+export default connect(select)(App);
