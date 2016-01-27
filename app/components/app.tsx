@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 let { connect } = require('react-redux');
-import * as Rx from '../../node_modules/rxjs/Rx';
 import IReduxConnectedComponent from '../types/IReduxConnectedComponent';
 import IGlobalState from '../IGlobalState';
+import Cannon from './cannon/Cannon';
 
 interface IAppProps extends IReduxConnectedComponent, IGlobalState {
   dispatch: Function;
@@ -13,20 +13,18 @@ function select(state: IGlobalState): IGlobalState {
   return state;
 };
 
-const App = (props: IAppProps) => {
+class App extends React.Component<IAppProps, any> {
 
-  // public componentDidMount() {
-  //   const angleControl = Rx.Observable.fromEvent((this.refs as any).angleControl, 'value');
-  // }
+  public render() {
+    const { dispatch } = this.props;
 
-  const { dispatch } = props;
+    return (
+      <div>
+        <Cannon angle={ this.props.canon.angle } power={ this.props.canon.power } dispatch={ this.props.dispatch } />
+      </div>
+    );
+  }
 
-  return (
-    <div>
-      <div ref='cannon'>CANNON HERE</div>
-      <input type='range' ref='angleControl' id='angleControl' min='0' value='0' max='360' step='2' />
-    </div>
-  );
 };
 
 export default connect(select)(App);
