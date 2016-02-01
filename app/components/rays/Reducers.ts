@@ -4,13 +4,26 @@ import IStandardAction from '../types/IAction';
 
 const initialState: IState = [];
 
-const addRay = (state: IState, action: Actions.IAddRay): IState =>
-  state; // todo
+/**
+ * TODO: USE IMMUTABLE COLLECTION, OTHERWISE THIS IS MUTATING STATE!!!
+ */
+const setRay = (state: IState, action: Actions.ISetRay): IState => {
+
+  const index = state.findIndex(ray => ray.id === action.payload.id);
+
+  if (index) {
+    state[index] = action.payload;
+  } else {
+    state.push(action.payload);
+  }
+
+  return state;
+};
 
 export default function reducer(state: IState = initialState, action: IStandardAction): IState {
   switch (action.type) {
-    case Actions.ADD_RAY:
-      return addRay(state, <Actions.IAddRay> action);
+    case Actions.SET_RAY:
+      return setRay(state, <Actions.ISetRay> action);
     default:
       return state;
   }

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import * as Rx from '../../../node_modules/rxjs/Rx';
 import * as CannonActions from './Actions';
+import Ray from '../rays/Ray';
+import RayCollection from '../rays/Collection';
 
 type ICannonProps = {
   dispatch: Function;
@@ -32,9 +34,11 @@ class Cannon extends React.Component<ICannonProps, any> {
 
   private updateAngle = (e: any) => {
     this.props.dispatch(CannonActions.updateAngle(e.target.value));
-  }
+  };
 
   public componentDidMount() {
+
+    RayCollection.setDispatcher(this.props.dispatch);
 
     // Angle control
     const angleControl = Rx.Observable.fromEvent((this.refs as any).angleControl, 'change');
@@ -51,7 +55,11 @@ class Cannon extends React.Component<ICannonProps, any> {
     cannonPowerLoading.subscribe((time: number) => this.props.power < 10 && this.props.dispatch(CannonActions.increasePower()));
 
     // Emit a ray. This needs to create a ray with a speed proportional to the power and a velocity given by the angle provided
-    cannonPowerEnd.subscribe(mouseEvent => console.log(this.props.power)); // TODO
+    cannonPowerEnd.subscribe(mouseEvent => {
+      const newRay = new Ray(this.props.power, this.props.angle, { x: 0, y: 0 });
+      RayCollection.add(newRay.ray);
+    });
+
   }
 
   public render() {
